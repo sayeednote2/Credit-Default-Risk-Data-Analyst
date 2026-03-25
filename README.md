@@ -2,6 +2,9 @@
 
 An end-to-end data analytics and machine learning project to predict credit default risk using Python, PyCaret, and Power BI.
 
+# Live Dashboard Link:
+https://app.powerbi.com/view?r=eyJrIjoiYWIyM2JiYmMtNTJhMi00NmNkLTlmNDYtNjA5MThhZTAwMmUzIiwidCI6ImU1NDhjMjU2LTRkODMtNDRiMi1iZWM2LTcwZDhhOTFhYzIxZSJ9&pageName=028140bb56801c4ea1c4
+
 ## **Project Overview**
 
 This project analyzes Home Credit's default risk data and builds a predictive ML model with an interactive Power BI dashboard.
