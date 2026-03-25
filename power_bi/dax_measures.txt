@@ -1,0 +1,199 @@
+-- Overview and segmentation
+Total Customers = DISTINCTCOUNT(fact_applications[SK_ID_CURR])
+
+Train Customers =
+CALCULATE(
+    [Total Customers],
+    fact_applications[DATASET] = "train"
+)
+
+Test Customers =
+CALCULATE(
+    [Total Customers],
+    fact_applications[DATASET] = "test"
+)
+
+Default Count =
+CALCULATE(
+    DISTINCTCOUNT(fact_applications[SK_ID_CURR]),
+    fact_applications[TARGET] = 1
+)
+
+Default Rate = DIVIDE([Default Count], [Total Customers], 0)
+
+Total Credit Amount = SUM(fact_applications[AMT_CREDIT])
+
+Avg Credit Amount = AVERAGE(fact_applications[AMT_CREDIT])
+
+Avg Loan Amount = AVERAGE(fact_applications[AMT_CREDIT])
+
+Avg Income = AVERAGE(fact_applications[AMT_INCOME_TOTAL])
+
+Avg Annuity = AVERAGE(fact_applications[AMT_ANNUITY])
+
+Avg Base Risk Score = AVERAGE(fact_applications[BASE_RISK_SCORE])
+
+Base High Risk Customers =
+CALCULATE(
+    DISTINCTCOUNT(fact_applications[SK_ID_CURR]),
+    fact_applications[BASE_RISK_BAND] IN {"High", "Very High"}
+)
+
+Base High Risk Share = DIVIDE([Base High Risk Customers], [Total Customers], 0)
+
+Total Applications = COUNTROWS(fact_applications)
+
+-- Credit behavior
+Bureau Loan Count = SUM(fact_bureau[BUREAU_LOAN_COUNT])
+
+Active Bureau Loans = SUM(fact_bureau[BUREAU_ACTIVE_COUNT])
+
+Closed Bureau Loans = SUM(fact_bureau[BUREAU_CLOSED_COUNT])
+
+Active Bureau Share = DIVIDE([Active Bureau Loans], [Bureau Loan Count], 0)
+
+Bureau Credit Sum = SUM(fact_bureau[BUREAU_CREDIT_SUM])
+
+Bureau Debt Sum = SUM(fact_bureau[BUREAU_DEBT_SUM])
+
+Bureau Overdue Sum = SUM(fact_bureau[BUREAU_OVERDUE_SUM])
+
+Overdue to Debt % = DIVIDE([Bureau Overdue Sum], [Bureau Debt Sum], 0)
+
+Previous Applications = SUM(fact_prev_applications[PREV_APP_COUNT])
+
+Approved Prev Apps = SUM(fact_prev_applications[PREV_APPROVED_COUNT])
+
+Refused Prev Apps = SUM(fact_prev_applications[PREV_REFUSED_COUNT])
+
+Approval Rate = DIVIDE([Approved Prev Apps], [Approved Prev Apps] + [Refused Prev Apps], 0)
+
+Refusal Rate = DIVIDE([Refused Prev Apps], [Approved Prev Apps] + [Refused Prev Apps], 0)
+
+Weighted Late Rate = AVERAGE(fact_installment_payments[INST_LATE_RATE])
+
+Avg Installment Days Late = AVERAGE(fact_installment_payments[INST_DAYS_LATE_MEAN])
+
+Max Installment Days Late = MAX(fact_installment_payments[INST_DAYS_LATE_MAX])
+
+Installment Payment Sum = SUM(fact_installment_payments[INST_PAYMENT_SUM])
+
+POS Record Count = SUM(fact_pos_cash_transactions[POS_RECORD_COUNT])
+
+Avg POS DPD = AVERAGE(fact_pos_cash_transactions[POS_DPD_MEAN])
+
+Max POS DPD = MAX(fact_pos_cash_transactions[POS_DPD_MAX])
+
+Avg POS DPD Default = AVERAGE(fact_pos_cash_transactions[POS_DPD_DEF_MEAN])
+
+Credit Card Records = SUM(fact_credit_card_transactions[CC_RECORD_COUNT])
+
+Credit Card Balance Sum = SUM(fact_credit_card_transactions[CC_BALANCE_SUM])
+
+Credit Card Drawings Sum = SUM(fact_credit_card_transactions[CC_DRAWINGS_SUM])
+
+Credit Card Payment Sum = SUM(fact_credit_card_transactions[CC_PAYMENT_SUM])
+
+Credit Utilization Avg = AVERAGE(fact_credit_card_transactions[CC_UTILIZATION_MEAN])
+
+Avg Peak Credit Utilization = AVERAGE(fact_credit_card_transactions[CC_UTILIZATION_MAX])
+
+-- Model monitoring
+Scored Customers = DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR])
+
+Train Scored Customers =
+CALCULATE(
+    [Scored Customers],
+    fact_model_predictions[DATASET] = "train"
+)
+
+Test Scored Customers =
+CALCULATE(
+    [Scored Customers],
+    fact_model_predictions[DATASET] = "test"
+)
+
+Predicted Defaults =
+CALCULATE(
+    DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR]),
+    fact_model_predictions[PRED_LABEL] = 1
+)
+
+Train Predicted Defaults =
+CALCULATE(
+    [Predicted Defaults],
+    fact_model_predictions[DATASET] = "train"
+)
+
+Predicted Default Rate = DIVIDE([Predicted Defaults], [Scored Customers], 0)
+
+Train Predicted Default Rate = DIVIDE([Train Predicted Defaults], [Train Scored Customers], 0)
+
+Avg Pred Score = AVERAGE(fact_model_predictions[PRED_SCORE])
+
+High Risk Customers =
+CALCULATE(
+    DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR]),
+    fact_model_predictions[PRED_RISK_BAND] IN {"High", "Very High"}
+)
+
+High Risk Share = DIVIDE([High Risk Customers], [Scored Customers], 0)
+
+Actual Defaults (Train) =
+CALCULATE(
+    DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR]),
+    fact_model_predictions[DATASET] = "train",
+    fact_model_predictions[TARGET] = 1
+)
+
+Observed Train Default Rate = DIVIDE([Actual Defaults (Train)], [Train Scored Customers], 0)
+
+True Positives =
+CALCULATE(
+    DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR]),
+    fact_model_predictions[DATASET] = "train",
+    fact_model_predictions[TARGET] = 1,
+    fact_model_predictions[PRED_LABEL] = 1
+)
+
+False Positives =
+CALCULATE(
+    DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR]),
+    fact_model_predictions[DATASET] = "train",
+    fact_model_predictions[TARGET] = 0,
+    fact_model_predictions[PRED_LABEL] = 1
+)
+
+True Negatives =
+CALCULATE(
+    DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR]),
+    fact_model_predictions[DATASET] = "train",
+    fact_model_predictions[TARGET] = 0,
+    fact_model_predictions[PRED_LABEL] = 0
+)
+
+False Negatives =
+CALCULATE(
+    DISTINCTCOUNT(fact_model_predictions[SK_ID_CURR]),
+    fact_model_predictions[DATASET] = "train",
+    fact_model_predictions[TARGET] = 1,
+    fact_model_predictions[PRED_LABEL] = 0
+)
+
+Model Precision = DIVIDE([True Positives], [True Positives] + [False Positives], 0)
+
+Model Recall = DIVIDE([True Positives], [True Positives] + [False Negatives], 0)
+
+Model Accuracy =
+DIVIDE(
+    [True Positives] + [True Negatives],
+    [True Positives] + [True Negatives] + [False Positives] + [False Negatives],
+    0
+)
+
+Model F1 =
+VAR PrecisionValue = [Model Precision]
+VAR RecallValue = [Model Recall]
+RETURN DIVIDE(2 * PrecisionValue * RecallValue, PrecisionValue + RecallValue, 0)
+
+Train Calibration Gap = [Train Predicted Default Rate] - [Observed Train Default Rate]

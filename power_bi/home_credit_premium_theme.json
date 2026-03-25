@@ -1,0 +1,302 @@
+{
+  "name": "Home Credit Premium Risk Theme",
+  "dataColors": [
+    "#2E7D32",
+    "#66BB6A",
+    "#F9A825",
+    "#F57C00",
+    "#C62828",
+    "#4E79A7",
+    "#E15759",
+    "#F28E2B",
+    "#76B7B2",
+    "#B07AA1"
+  ],
+  "background": "#0F141A",
+  "foreground": "#F3F6FA",
+  "tableAccent": "#F57C00",
+  "good": "#2E7D32",
+  "neutral": "#4E79A7",
+  "bad": "#C62828",
+  "minimum": "#E8F5E9",
+  "center": "#F9A825",
+  "maximum": "#FFEBEE",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": false,
+            "transparency": 100
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "alignment": "left",
+            "fontSize": 12,
+            "fontFamily": "Segoe UI Semibold",
+            "color": {
+              "solid": {
+                "color": "#F3F6FA"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ],
+        "categoryLabels": [
+          {
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "show": true,
+            "position": "Top",
+            "titleText": "",
+            "labelColor": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            },
+            "fontSize": 11
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "title": [
+          {
+            "show": true,
+            "alignment": "left",
+            "fontSize": 11,
+            "fontFamily": "Segoe UI Semibold",
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontSize": 24,
+            "fontFamily": "Segoe UI Semibold",
+            "color": {
+              "solid": {
+                "color": "#F3F6FA"
+              }
+            }
+          }
+        ],
+        "categoryLabels": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "columnChart": {
+      "*": {
+        "dataPoint": [
+          {
+            "defaultColor": {
+              "solid": {
+                "color": "#4E79A7"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "barChart": {
+      "*": {
+        "dataPoint": [
+          {
+            "defaultColor": {
+              "solid": {
+                "color": "#4E79A7"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "clusteredColumnChart": {
+      "*": {
+        "dataPoint": [
+          {
+            "defaultColor": {
+              "solid": {
+                "color": "#4E79A7"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "clusteredBarChart": {
+      "*": {
+        "dataPoint": [
+          {
+            "defaultColor": {
+              "solid": {
+                "color": "#4E79A7"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "lineChart": {
+      "*": {
+        "dataPoint": [
+          {
+            "defaultColor": {
+              "solid": {
+                "color": "#F57C00"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scatterChart": {
+      "*": {
+        "categoryLabels": [
+          {
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "matrix": {
+      "*": {
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontal": false,
+            "outlineColor": {
+              "solid": {
+                "color": "#2A3642"
+              }
+            }
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontSize": 11,
+            "fontFamily": "Segoe UI Semibold",
+            "color": {
+              "solid": {
+                "color": "#F3F6FA"
+              }
+            }
+          }
+        ],
+        "rowHeaders": [
+          {
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ],
+        "values": [
+          {
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontal": false,
+            "outlineColor": {
+              "solid": {
+                "color": "#2A3642"
+              }
+            }
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontSize": 11,
+            "fontFamily": "Segoe UI Semibold",
+            "color": {
+              "solid": {
+                "color": "#F3F6FA"
+              }
+            }
+          }
+        ],
+        "values": [
+          {
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "title": [
+          {
+            "show": true,
+            "fontSize": 11,
+            "fontFamily": "Segoe UI Semibold",
+            "color": {
+              "solid": {
+                "color": "#F3F6FA"
+              }
+            }
+          }
+        ],
+        "items": [
+          {
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#D9E1EA"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
